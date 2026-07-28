@@ -6,6 +6,7 @@ import android.graphics.PixelFormat
 import android.os.Build
 import android.view.Gravity
 import android.view.MotionEvent
+import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.app.NotificationCompat
@@ -56,7 +57,10 @@ class OverlayService : Service() {
 
     private fun handleTouch(e: MotionEvent): Boolean {
         when(e.action) {
-            MotionEvent.ACTION_DOWN -> { ix=wv.layoutParams.x; iy=wv.layoutParams.y; tx=e.rawX; ty=e.rawY }
+            MotionEvent.ACTION_DOWN -> {
+                val lp = wv.layoutParams as WindowManager.LayoutParams
+                ix = lp.x; iy = lp.y; tx = e.rawX; ty = e.rawY
+            }
             MotionEvent.ACTION_MOVE -> {
                 val lp = wv.layoutParams as WindowManager.LayoutParams
                 lp.x = ix - (e.rawX - tx).toInt()
