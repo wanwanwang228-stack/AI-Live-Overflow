@@ -36,7 +36,7 @@ class OverlayService : Service() {
         wv = WebView(this).apply {
             settings.javaScriptEnabled = true
             setBackgroundColor(0x00000000)
-            webViewClient = object : WebViewClient {}
+            webViewClient = object : WebViewClient() {}
             setOnTouchListener { _, e -> handleTouch(e); true }
             loadUrl("file:///android_asset/pet.html")
         }
@@ -58,10 +58,12 @@ class OverlayService : Service() {
         when(e.action) {
             MotionEvent.ACTION_DOWN -> { ix=wv.layoutParams.x; iy=wv.layoutParams.y; tx=e.rawX; ty=e.rawY }
             MotionEvent.ACTION_MOVE -> {
-                (wv.layoutParams as WindowManager.LayoutParams).apply { x=ix-(e.rawX-tx).toInt(); y=iy+(e.rawY-ty).toInt() }
-                wm.updateViewLayout(wv, wv.layoutParams)
+                val lp = wv.layoutParams as WindowManager.LayoutParams
+                lp.x = ix - (e.rawX - tx).toInt()
+                lp.y = iy + (e.rawY - ty).toInt()
+                wm.updateViewLayout(wv, lp)
             }
-            MotionEvent.ACTION_UP -> { wv.evaluateJavascript("javascript:trigger('tap')",null) }
+            MotionEvent.ACTION_UP -> { wv.evaluateJavascript("javascript:trigger('tap')", null) }
         }
         return true
     }
@@ -74,21 +76,28 @@ class OverlayService : Service() {
 
     private suspend fun pollState() = withContext(Dispatchers.IO) {
         val c = URL(SU+"/rest/v1/pet_state?order=updated_at.desc&limit=1").openConnection() as HttpURLConnection
-        c.setRequestProperty("apikey",SK); c.setRequestProperty("Authorization","Bearer "+SK)
-        val body = c.inputStream.bufferedReader().readText(); c.disconnect()
+        c.setRequestProperty("apikey",SK)
+        c.setRequestProperty("Authorization","Bearer "+SK)
+        val body = c.inputStream.bufferedReader().readText()
+        c.disconnect()
         if(body!="[]") {
             try {
                 val arr = org.json.JSONArray(body)
                 if(arr.length()>0) {
                     val s = arr.getJSONObject(0)
-                    val k = s.optString("state_key",""); val v = s.optString("state_value","")
-                    withContext(Dispatchers.Main) { wv.evaluateJavascript("javascript:applyState('"+k+"','"+v+"')",null) }
+                    val k = s.optString("state_key","")
+                    val v = s.optString("state_value","")
+                    withContext(Dispatchers.Main) {
+                        wv.evaluateJavascript("javascript:applyState('"+k+"','"+v+"')", null)
+                    }
                 }
             } catch(_:Exception){}
         }
     }
 
     override fun onDestroy() {
-        scope.cancel(); wm.removeView(wv); super.onDestroy()
+        scope.cancel()
+        wm.removeView(wv)
+        super.onDestroy()
     }
 }
