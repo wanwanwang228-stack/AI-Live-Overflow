@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnStart).setOnClickListener {
             if (Settings.canDrawOverlays(this).not()) {
                 startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    Uri.parse(\"package:${packageName}\")))
+                    Uri.parse(\"package:\" + packageName)))
             } else {
                 startOverlay()
             }
