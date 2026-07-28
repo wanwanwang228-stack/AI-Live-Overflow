@@ -9,6 +9,7 @@ import android.view.*
 import android.webkit.*
 import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.*
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -24,7 +25,7 @@ class OverlayService : Service() {
 
     companion object {
         const val SUPABASE_URL = "https://hrxyjjcghrjwrcdcbhfq.supabase.co"
-        const val SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhyeHlqamNnaHJqd3JjZGNiaGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyMjMxNDYsImV4cCI6MjEwMDc5OTE0Nn0.aLZem-JvA7gA71dppwreyRIY98LgEsYRKjPqfVi2rkg"
+        const val SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhyeHlqamNnaHJqd3JjZGNiaGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyMjMxNDYsImV4cCI6MjEwMDc5OTE0Nn0.aLZem-JvA7gA71dppwreyRIY98LgEsYRKjPqfVi2rKg"
     }
 
     override fun onBind(intent: Intent?) = null
@@ -73,8 +74,8 @@ class OverlayService : Service() {
 
     private fun injectSupabaseConfig() {
         webView.evaluateJavascript("""
-            window.SUPABASE_URL = "$SUPABASE_URL";
-            window.SUPABASE_KEY = "$SUPABASE_KEY";
+            window.SUPABASE_URL = "${'$'}SUPABASE_URL";
+            window.SUPABASE_KEY = "${'$'}SUPABASE_KEY";
         """.trimIndent(), null)
     }
 
@@ -116,7 +117,7 @@ class OverlayService : Service() {
     }
 
     private fun callJS(code: String) {
-        webView.evaluateJavascript("javascript:$code", null)
+        webView.evaluateJavascript("javascript:" + code, null)
     }
 
     private fun createNotification(): Notification {
@@ -133,8 +134,8 @@ class OverlayService : Service() {
         appDetector = AppDetector(this) { pkg ->
             val reaction = AppDetector.APP_REACTIONS[pkg]
             if (reaction != null) {
-                callJS("trigger('${reaction.first}')")
-                callJS("showBubbleText('${reaction.second}')")
+                callJS("trigger('${'$'}{reaction.first}')")
+                callJS("showBubbleText('${'$'}{reaction.second}')")
                 scope.launch { postAppUsage(pkg) }
             }
         }
@@ -181,21 +182,21 @@ class OverlayService : Service() {
     }
 
     private suspend fun pollSupabaseState() = withContext(Dispatchers.IO) {
-        val url = URL("$SUPABASE_URL/rest/v1/pet_state?order=updated_at.desc&limit=1")
+        val url = URL(SUPABASE_URL + "/rest/v1/pet_state?order=updated_at.desc&limit=1")
         val conn = url.openConnection() as HttpURLConnection
         conn.setRequestProperty("apikey", SUPABASE_KEY)
-        conn.setRequestProperty("Authorization", "Bearer $SUPABASE_KEY")
+        conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY)
         val body = BufferedReader(InputStreamReader(conn.inputStream)).readText()
         conn.disconnect()
         if (body != "[]") {
             try {
-                val arr = org.json.JSONArray(body)
+                val arr = JSONArray(body)
                 if (arr.length() > 0) {
                     val state = arr.getJSONObject(0)
                     val key = state.optString("state_key", "")
                     val value = state.optString("state_value", "")
                     withContext(Dispatchers.Main) {
-                        callJS("applyState('$key', '$value')")
+                        callJS("applyState('" + key + "', '" + value + "')")
                     }
                 }
             } catch (_: Exception) {}
@@ -204,15 +205,15 @@ class OverlayService : Service() {
 
     private suspend fun logGesture() = withContext(Dispatchers.IO) {
         try {
-            val url = URL("$SUPABASE_URL/rest/v1/gesture_log")
+            val url = URL(SUPABASE_URL + "/rest/v1/gesture_log")
             val conn = url.openConnection() as HttpURLConnection
             conn.requestMethod = "POST"
             conn.doOutput = true
             conn.setRequestProperty("Content-Type", "application/json")
             conn.setRequestProperty("apikey", SUPABASE_KEY)
-            conn.setRequestProperty("Authorization", "Bearer $SUPABASE_KEY")
+            conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY)
             conn.setRequestProperty("Prefer", "return=minimal")
-            val body = """{"gesture_type":"tap"}"""
+            val body = "{\"gesture_type\":\"tap\"}"
             conn.outputStream.use { it.write(body.toByteArray()) }
             conn.responseCode
             conn.disconnect()
@@ -221,15 +222,15 @@ class OverlayService : Service() {
 
     private suspend fun postAppUsage(pkg: String) = withContext(Dispatchers.IO) {
         try {
-            val url = URL("$SUPABASE_URL/rest/v1/app_usage")
+            val url = URL(SUPABASE_URL + "/rest/v1/app_usage")
             val conn = url.openConnection() as HttpURLConnection
             conn.requestMethod = "POST"
             conn.doOutput = true
             conn.setRequestProperty("Content-Type", "application/json")
             conn.setRequestProperty("apikey", SUPABASE_KEY)
-            conn.setRequestProperty("Authorization", "Bearer $SUPABASE_KEY")
+            conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY)
             conn.setRequestProperty("Prefer", "return=minimal")
-            val body = """{"package_name":"$pkg"}"""
+            val body = "{\"package_name\":\"" + pkg + "\"}"
             conn.outputStream.use { it.write(body.toByteArray()) }
             conn.disconnect()
         } catch (_: Exception) {}
