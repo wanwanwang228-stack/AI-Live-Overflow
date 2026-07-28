@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnStart).setOnClickListener {
             if (Settings.canDrawOverlays(this).not()) {
                 startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    Uri.parse(\"package:\" + packageName)))
+                    Uri.parse("package:" + packageName)))
             } else {
                 startOverlay()
             }
@@ -28,14 +28,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (Settings.canDrawOverlays(this)) {
-            findViewById<TextView>(R.id.tvStatus).text = "\u2705 \u60ac\u6d6e\u7a97\u6743\u9650\u5df2\u5f00"
+            findViewById<TextView>(R.id.tvStatus).text = "✅ 悬浮窗权限已开"
         }
     }
 
     override fun onResume() {
         super.onResume()
         if (Settings.canDrawOverlays(this)) {
-            findViewById<TextView>(R.id.tvStatus).text = "\u2705 \u60ac\u6d6e\u7a97\u6743\u9650\u5df2\u5f00"
+            findViewById<TextView>(R.id.tvStatus).text = "✅ 悬浮窗权限已开"
             startOverlay()
         }
     }
