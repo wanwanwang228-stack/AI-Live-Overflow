@@ -22,8 +22,8 @@ class OverlayService : Service() {
     companion object {
         const val SU = "https://hrxyjjcghrjwrcdcbhfq.supabase.co"
         const val SK = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhyeHlqamNnaHJqd3JjZGNiaGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyMjMxNDYsImV4cCI6MjEwMDc5OTE0Nn0.aLZem-JvA7gA71dppwreyRIY98LgEsYRKjPqfVi2rKg"
-        const val PET_W = 300
-        const val PET_H = 350
+        const val PET_W = 260
+        const val PET_H = 280
     }
 
     override fun onBind(intent: Intent?) = null
@@ -50,7 +50,7 @@ class OverlayService : Service() {
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT)
         lp.gravity = Gravity.TOP or Gravity.END
-        lp.x = 0; lp.y = 300
+        lp.x = 0; lp.y = 100
         wm.addView(wv, lp)
         startPolling()
     }
@@ -69,7 +69,7 @@ class OverlayService : Service() {
                 lp.y = iy + (e.rawY - ty).toInt()
                 wm.updateViewLayout(wv, lp)
             }
-            MotionEvent.ACTION_UP -> { wv.evaluateJavascript("javascript:trigger('tap')", null) }
+            MotionEvent.ACTION_UP -> wv.evaluateJavascript("trigger('tap')", null)
         }
         return true
     }
@@ -94,7 +94,7 @@ class OverlayService : Service() {
                     val k = s.optString("state_key","")
                     val v = s.optString("state_value","")
                     withContext(Dispatchers.Main) {
-                        wv.evaluateJavascript("javascript:applyState('"+k+"','"+v+"')", null)
+                        wv.evaluateJavascript("applyState('"+k+"','"+v+"')", null)
                     }
                 }
             } catch(_:Exception){}
