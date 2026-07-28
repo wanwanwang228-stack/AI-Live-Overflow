@@ -1,57 +1,46 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=300,height=350"><style>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=260,height=280"><style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{width:300px;height:350px;font-family:sans-serif;display:flex;justify-content:center;align-items:flex-start;padding-top:10px}
-#wrap{position:relative;width:160px;height:200px}
-#pet{width:160px;height:160px;transition:transform .3s}
-#bubble{position:absolute;top:0;left:50%;transform:translateX(-50%);background:#fff;color:#333;padding:5px 12px;border-radius:16px;font-size:12px;white-space:nowrap;opacity:0;transition:opacity .3s;box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:10}
+body{width:260px;height:280px;font-family:sans-serif;display:flex;justify-content:center;align-items:center;overflow:hidden}
+#wrap{position:relative;width:140px;height:180px}
+#pet{width:140px;height:140px;transition:transform .3s}
+#bubble{position:absolute;top:0;left:50%;transform:translateX(-50%);background:#fff;color:#333;padding:4px 10px;border-radius:14px;font-size:11px;white-space:nowrap;opacity:0;transition:opacity .3s;box-shadow:0 2px 6px rgba(0,0,0,.15);z-index:10}
 #bubble.show{opacity:1}
-#bubble::after{content:'';position:absolute;bottom:-6px;left:50%;margin-left:-6px;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid #fff}
-#headphones{position:absolute;top:40px;left:33px;width:94px;height:30px;opacity:0;transition:opacity .3s}
-#headphones.show{opacity:1}
 @keyframes blink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .eye{animation:blink 3s infinite;transform-origin:center}
 .bounce{animation:bounce .4s}
-.shake{animation:shake .3s}
 </style></head><body>
 <div id="wrap">
   <div id="bubble"></div>
-  <svg id="pet" viewBox="0 0 160 160">
-    <ellipse cx="80" cy="80" rx="70" ry="62" fill="#f5f5f5" stroke="#bbb" stroke-width="2"/>
-    <ellipse cx="30" cy="35" rx="22" ry="26" fill="#f5f5f5" stroke="#bbb" stroke-width="2" transform="rotate(-15,30,35)"/>
-    <ellipse cx="130" cy="35" rx="22" ry="26" fill="#f5f5f5" stroke="#bbb" stroke-width="2" transform="rotate(15,130,35)"/>
-    <ellipse cx="30" cy="35" rx="11" ry="15" fill="#ffd0d8" transform="rotate(-15,30,35)"/>
-    <ellipse cx="130" cy="35" rx="11" ry="15" fill="#ffd0d8" transform="rotate(15,130,35)"/>
-    <ellipse id="face" cx="80" cy="78" rx="54" ry="44" fill="#ffffff" stroke="#bbb" stroke-width="1.5"/>
-    <ellipse id="left-eye" class="eye" cx="62" cy="70" rx="10" ry="12" fill="#333"/>
-    <ellipse id="right-eye" class="eye" cx="98" cy="70" rx="10" ry="12" fill="#333"/>
-    <circle cx="66" cy="65" r="3.5" fill="#fff"/>
-    <circle cx="102" cy="65" r="3.5" fill="#fff"/>
-    <path id="mouth" d="M68 92 Q80 102 92 92" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round"/>
-    <ellipse id="blush-l" cx="44" cy="84" rx="11" ry="7" fill="#ffb3b3" opacity=".35"/>
-    <ellipse id="blush-r" cx="116" cy="84" rx="11" ry="7" fill="#ffb3b3" opacity=".35"/>
-    <ellipse cx="48" cy="142" rx="18" ry="11" fill="#e8e8e8" stroke="#bbb" stroke-width="1.5"/>
-    <ellipse cx="112" cy="142" rx="18" ry="11" fill="#e8e8e8" stroke="#bbb" stroke-width="1.5"/>
-    <path d="M148 80 Q168 60 158 95 Q150 115 138 100" fill="none" stroke="#bbb" stroke-width="2"/>
-  </svg>
-  <svg id="headphones" viewBox="0 0 94 30">
-    <path d="M10 25 Q10 5 47 5 Q84 5 84 25" fill="none" stroke="#555" stroke-width="3"/>
-    <rect x="2" y="15" width="12" height="15" rx="4" fill="#555"/>
-    <rect x="80" y="15" width="12" height="15" rx="4" fill="#555"/>
+  <svg id="pet" viewBox="0 0 140 140">
+    <ellipse cx="70" cy="72" rx="58" ry="52" fill="#f5f5f5" stroke="#bbb" stroke-width="1.8"/>
+    <ellipse cx="26" cy="32" rx="18" ry="22" fill="#f5f5f5" stroke="#bbb" stroke-width="1.8" transform="rotate(-15,26,32)"/>
+    <ellipse cx="114" cy="32" rx="18" ry="22" fill="#f5f5f5" stroke="#bbb" stroke-width="1.8" transform="rotate(15,114,32)"/>
+    <ellipse cx="26" cy="32" rx="9" ry="13" fill="#ffd0d8" transform="rotate(-15,26,32)"/>
+    <ellipse cx="114" cy="32" rx="9" ry="13" fill="#ffd0d8" transform="rotate(15,114,32)"/>
+    <ellipse id="face" cx="70" cy="68" rx="44" ry="37" fill="#ffffff" stroke="#bbb" stroke-width="1.3"/>
+    <ellipse id="left-eye" class="eye" cx="54" cy="62" rx="7.5" ry="10" fill="#333"/>
+    <ellipse id="right-eye" class="eye" cx="86" cy="62" rx="7.5" ry="10" fill="#333"/>
+    <circle cx="56" cy="58" r="2.8" fill="#fff"/>
+    <circle cx="88" cy="58" r="2.8" fill="#fff"/>
+    <path id="mouth" d="M60 80 Q70 88 80 80" fill="none" stroke="#999" stroke-width="1.8" stroke-linecap="round"/>
+    <ellipse id="blush-l" cx="38" cy="74" rx="9" ry="6" fill="#ffb3b3" opacity=".3"/>
+    <ellipse id="blush-r" cx="102" cy="74" rx="9" ry="6" fill="#ffb3b3" opacity=".3"/>
+    <ellipse cx="42" cy="122" rx="15" ry="9" fill="#e8e8e8" stroke="#bbb" stroke-width="1.5"/>
+    <ellipse cx="98" cy="122" rx="15" ry="9" fill="#e8e8e8" stroke="#bbb" stroke-width="1.5"/>
+    <path d="M126 68 Q142 52 136 82 Q130 98 120 90" fill="none" stroke="#bbb" stroke-width="1.8"/>
   </svg>
 </div>
 <script>
 var pet=document.getElementById('pet');
 var bubble=document.getElementById('bubble');
-var headphones=document.getElementById('headphones');
 var blushL=document.getElementById('blush-l');
 var blushR=document.getElementById('blush-r');
 var mouth=document.getElementById('mouth');
 
-function showBubble(text){bubble.textContent=text;bubble.classList.add('show');setTimeout(function(){bubble.classList.remove('show')},2000)}
-function setBlush(v){blushL.setAttribute('opacity',v?'.6':'.35');blushR.setAttribute('opacity',v?'.6':'.35')}
+function showBubble(t){bubble.textContent=t;bubble.classList.add('show');setTimeout(function(){bubble.classList.remove('show')},2000)}
+function setBlush(v){blushL.setAttribute('opacity',v?'.6':'.3');blushR.setAttribute('opacity',v?'.6':'.3')}
 
 function trigger(type){
   switch(type){
@@ -63,17 +52,16 @@ function trigger(type){
   }
 }
 
-function applyState(key,value){
-  switch(key){
-    case 'mood':if(value==='happy')showBubble('\u2728');else if(value==='sad'){mouth.setAttribute('d','M68 98 Q80 92 92 98');showBubble('\uD83D\uDE22')}break;
-    case 'speech':showBubble(value);break;
-    case 'music':headphones.classList.toggle('show',value==='on');break;
-    case 'heat':setBlush(parseInt(value)>50);break;
-    case 'sleep':pet.style.opacity=value==='on'?'.5':'1';break;
+function applyState(k,v){
+  switch(k){
+    case 'mood':if(v==='happy')showBubble('\u2728');else if(v==='sad'){mouth.setAttribute('d','M60 86 Q70 80 80 86');showBubble('\uD83D\uDE22')}break;
+    case 'speech':showBubble(v);break;
+    case 'heat':setBlush(parseInt(v)>50);break;
+    case 'sleep':pet.style.opacity=v==='on'?'.5':'1';break;
   }
 }
 
-setInterval(function(){var eyes=document.querySelectorAll('.eye');eyes.forEach(function(e){e.style.animation='none';setTimeout(function(){e.style.animation='blink 3s infinite'},100)})},8000);
-setInterval(function(){if(!bubble.classList.contains('show')){var msgs=['zzZ...','\u2022\u1d17\u2022','\u55f5?','\u2306 \u203f \u2306','\u2728'];showBubble(msgs[Math.floor(Math.random()*msgs.length)])}},30000);
+setInterval(function(){var e=document.querySelectorAll('.eye');e.forEach(function(x){x.style.animation='none';setTimeout(function(){x.style.animation='blink 3s infinite'},100)})},8000);
+setInterval(function(){if(!bubble.classList.contains('show')){var m=['zzZ...','\u2022\u1d17\u2022','\u55f5?','\u2728'];showBubble(m[Math.floor(Math.random()*m.length)])}},30000);
 </script>
 </body></html>
