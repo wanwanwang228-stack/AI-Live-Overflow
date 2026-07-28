@@ -22,6 +22,8 @@ class OverlayService : Service() {
     companion object {
         const val SU = "https://hrxyjjcghrjwrcdcbhfq.supabase.co"
         const val SK = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhyeHlqamNnaHJqd3JjZGNiaGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyMjMxNDYsImV4cCI6MjEwMDc5OTE0Nn0.aLZem-JvA7gA71dppwreyRIY98LgEsYRKjPqfVi2rKg"
+        const val PET_W = 300
+        const val PET_H = 350
     }
 
     override fun onBind(intent: Intent?) = null
@@ -41,7 +43,7 @@ class OverlayService : Service() {
             setOnTouchListener { _, e -> handleTouch(e); true }
             loadUrl("file:///android_asset/pet.html")
         }
-        val lp = WindowManager.LayoutParams(200,200,
+        val lp = WindowManager.LayoutParams(PET_W, PET_H,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else WindowManager.LayoutParams.TYPE_PHONE,
