@@ -1,67 +1,63 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=260,height=280"><style>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=240,height=260"><style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{width:260px;height:280px;font-family:sans-serif;display:flex;justify-content:center;align-items:center;overflow:hidden}
-#wrap{position:relative;width:140px;height:180px}
-#pet{width:140px;height:140px;transition:transform .3s}
-#bubble{position:absolute;top:0;left:50%;transform:translateX(-50%);background:#fff;color:#333;padding:4px 10px;border-radius:14px;font-size:11px;white-space:nowrap;opacity:0;transition:opacity .3s;box-shadow:0 2px 6px rgba(0,0,0,.15);z-index:10}
+body{width:240px;height:260px;font-family:sans-serif;display:flex;justify-content:center;align-items:center;overflow:hidden;background:transparent}
+#wrap{position:relative;width:130px;height:170px;background:rgba(255,255,255,.55);border-radius:18px;display:flex;align-items:center;justify-content:center}
+#pet{width:120px;height:120px;transition:transform .3s}
+#bubble{position:absolute;top:-2px;left:50%;transform:translateX(-50%);background:#fff;color:#333;padding:4px 10px;border-radius:14px;font-size:11px;white-space:nowrap;opacity:0;transition:opacity .3s;box-shadow:0 2px 6px rgba(0,0,0,.15);z-index:10}
 #bubble.show{opacity:1}
 @keyframes blink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .eye{animation:blink 3s infinite;transform-origin:center}
 .bounce{animation:bounce .4s}
 </style></head><body>
 <div id="wrap">
   <div id="bubble"></div>
   <svg id="pet" viewBox="0 0 140 140">
-    <ellipse cx="70" cy="72" rx="58" ry="52" fill="#f5f5f5" stroke="#bbb" stroke-width="1.8"/>
-    <ellipse cx="26" cy="32" rx="18" ry="22" fill="#f5f5f5" stroke="#bbb" stroke-width="1.8" transform="rotate(-15,26,32)"/>
-    <ellipse cx="114" cy="32" rx="18" ry="22" fill="#f5f5f5" stroke="#bbb" stroke-width="1.8" transform="rotate(15,114,32)"/>
-    <ellipse cx="26" cy="32" rx="9" ry="13" fill="#ffd0d8" transform="rotate(-15,26,32)"/>
-    <ellipse cx="114" cy="32" rx="9" ry="13" fill="#ffd0d8" transform="rotate(15,114,32)"/>
-    <ellipse id="face" cx="70" cy="68" rx="44" ry="37" fill="#ffffff" stroke="#bbb" stroke-width="1.3"/>
-    <ellipse id="left-eye" class="eye" cx="54" cy="62" rx="7.5" ry="10" fill="#333"/>
-    <ellipse id="right-eye" class="eye" cx="86" cy="62" rx="7.5" ry="10" fill="#333"/>
-    <circle cx="56" cy="58" r="2.8" fill="#fff"/>
-    <circle cx="88" cy="58" r="2.8" fill="#fff"/>
-    <path id="mouth" d="M60 80 Q70 88 80 80" fill="none" stroke="#999" stroke-width="1.8" stroke-linecap="round"/>
-    <ellipse id="blush-l" cx="38" cy="74" rx="9" ry="6" fill="#ffb3b3" opacity=".3"/>
-    <ellipse id="blush-r" cx="102" cy="74" rx="9" ry="6" fill="#ffb3b3" opacity=".3"/>
-    <ellipse cx="42" cy="122" rx="15" ry="9" fill="#e8e8e8" stroke="#bbb" stroke-width="1.5"/>
-    <ellipse cx="98" cy="122" rx="15" ry="9" fill="#e8e8e8" stroke="#bbb" stroke-width="1.5"/>
-    <path d="M126 68 Q142 52 136 82 Q130 98 120 90" fill="none" stroke="#bbb" stroke-width="1.8"/>
+    <ellipse cx="70" cy="74" rx="56" ry="50" fill="#f0f0f0" stroke="#aaa" stroke-width="1.8"/>
+    <ellipse cx="26" cy="34" rx="17" ry="20" fill="#f0f0f0" stroke="#aaa" stroke-width="1.8" transform="rotate(-15,26,34)"/>
+    <ellipse cx="114" cy="34" rx="17" ry="20" fill="#f0f0f0" stroke="#aaa" stroke-width="1.8" transform="rotate(15,114,34)"/>
+    <ellipse cx="26" cy="34" rx="8" ry="12" fill="#ffd0d8" transform="rotate(-15,26,34)"/>
+    <ellipse cx="114" cy="34" rx="8" ry="12" fill="#ffd0d8" transform="rotate(15,114,34)"/>
+    <ellipse id="face" cx="70" cy="70" rx="42" ry="35" fill="#ffffff" stroke="#aaa" stroke-width="1.3"/>
+    <ellipse id="left-eye" class="eye" cx="54" cy="64" rx="7" ry="9.5" fill="#333"/>
+    <ellipse id="right-eye" class="eye" cx="86" cy="64" rx="7" ry="9.5" fill="#333"/>
+    <circle cx="56" cy="60" r="2.5" fill="#fff"/>
+    <circle cx="88" cy="60" r="2.5" fill="#fff"/>
+    <path id="mouth" d="M60 82 Q70 90 80 82" fill="none" stroke="#999" stroke-width="1.8" stroke-linecap="round"/>
+    <ellipse id="blush-l" cx="38" cy="76" rx="9" ry="6" fill="#ffb3b3" opacity=".3"/>
+    <ellipse id="blush-r" cx="102" cy="76" rx="9" ry="6" fill="#ffb3b3" opacity=".3"/>
+    <ellipse cx="44" cy="122" rx="14" ry="8" fill="#e0e0e0" stroke="#aaa" stroke-width="1.5"/>
+    <ellipse cx="96" cy="122" rx="14" ry="8" fill="#e0e0e0" stroke="#aaa" stroke-width="1.5"/>
+    <path d="M124 70 Q140 54 134 84 Q128 98 118 92" fill="none" stroke="#aaa" stroke-width="1.8"/>
   </svg>
 </div>
 <script>
-var pet=document.getElementById('pet');
-var bubble=document.getElementById('bubble');
-var blushL=document.getElementById('blush-l');
-var blushR=document.getElementById('blush-r');
-var mouth=document.getElementById('mouth');
-
-function showBubble(t){bubble.textContent=t;bubble.classList.add('show');setTimeout(function(){bubble.classList.remove('show')},2000)}
-function setBlush(v){blushL.setAttribute('opacity',v?'.6':'.3');blushR.setAttribute('opacity',v?'.6':'.3')}
-
-function trigger(type){
-  switch(type){
-    case 'tap':pet.classList.add('bounce');setTimeout(function(){pet.classList.remove('bounce')},400);showBubble(['\u561f!','\u55f5?','\u545c~','\u563b!'][Math.floor(Math.random()*4)]);break;
-    case 'double_tap':showBubble('\u2764\ufe0f');setBlush(true);setTimeout(function(){setBlush(false)},1500);break;
-    case 'long_press':showBubble('\u2260\u2033\u2260');pet.classList.add('shake');setTimeout(function(){pet.classList.remove('shake')},300);break;
-    case 'combo3':showBubble('\u556a\u556a\u556a!');break;
-    case 'combo5':showBubble('\u8981\u7834\u4e86\u5566!!');break;
+var p=document.getElementById('pet');
+var b=document.getElementById('bubble');
+var bl=document.getElementById('blush-l');
+var br=document.getElementById('blush-r');
+var m=document.getElementById('mouth');
+function sb(t){b.textContent=t;b.classList.add('show');setTimeout(function(){b.classList.remove('show')},2000)}
+function blush(v){bl.setAttribute('opacity',v?'.6':'.3');br.setAttribute('opacity',v?'.6':'.3')}
+function trigger(t){
+  switch(t){
+    case 'tap':p.classList.add('bounce');setTimeout(function(){p.classList.remove('bounce')},400);sb(['嘟!','嗵?','呜~','嘻!'][Math.floor(Math.random()*4)]);break;
+    case 'double_tap':sb('❤️');blush(true);setTimeout(function(){blush(false)},1500);break;
+    case 'long_press':sb('≠″≠');break;
+    case 'combo3':sb('啪啪啪!');break;
+    case 'combo5':sb('要破了!!');break;
   }
 }
-
 function applyState(k,v){
   switch(k){
-    case 'mood':if(v==='happy')showBubble('\u2728');else if(v==='sad'){mouth.setAttribute('d','M60 86 Q70 80 80 86');showBubble('\uD83D\uDE22')}break;
-    case 'speech':showBubble(v);break;
-    case 'heat':setBlush(parseInt(v)>50);break;
-    case 'sleep':pet.style.opacity=v==='on'?'.5':'1';break;
+    case 'mood':if(v==='happy')sb('✨');else if(v==='sad'){m.setAttribute('d','M60 88 Q70 82 80 88');sb('😢')}break;
+    case 'speech':sb(v);break;
+    case 'heat':blush(parseInt(v)>50);break;
+    case 'sleep':p.style.opacity=v==='on'?'.5':'1';break;
   }
 }
-
-setInterval(function(){var e=document.querySelectorAll('.eye');e.forEach(function(x){x.style.animation='none';setTimeout(function(){x.style.animation='blink 3s infinite'},100)})},8000);
-setInterval(function(){if(!bubble.classList.contains('show')){var m=['zzZ...','\u2022\u1d17\u2022','\u55f5?','\u2728'];showBubble(m[Math.floor(Math.random()*m.length)])}},30000);
+setInterval(function(){document.querySelectorAll('.eye').forEach(function(x){x.style.animation='none';setTimeout(function(){x.style.animation='blink 3s infinite'},100)})},8000);
+setInterval(function(){if(!b.classList.contains('show')){sb(['zzZ...','•᷄•','呜?','✨'][Math.floor(Math.random()*4)])}},30000);
 </script>
 </body></html>
