@@ -22,8 +22,8 @@ class OverlayService : Service() {
     companion object {
         const val SU = "https://hrxyjjcghrjwrcdcbhfq.supabase.co"
         const val SK = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhyeHlqamNnaHJqd3JjZGNiaGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyMjMxNDYsImV4cCI6MjEwMDc5OTE0Nn0.aLZem-JvA7gA71dppwreyRIY98LgEsYRKjPqfVi2rKg"
-        const val PET_W = 260
-        const val PET_H = 280
+        const val PET_W = 240
+        const val PET_H = 260
     }
 
     override fun onBind(intent: Intent?) = null
@@ -47,10 +47,11 @@ class OverlayService : Service() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             PixelFormat.TRANSLUCENT)
-        lp.gravity = Gravity.TOP or Gravity.END
-        lp.x = 0; lp.y = 100
+        lp.gravity = Gravity.TOP or Gravity.START
+        lp.x = 50; lp.y = 100
         wm.addView(wv, lp)
         startPolling()
     }
