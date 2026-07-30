@@ -2,8 +2,8 @@
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=240,height=260"><style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:240px;height:260px;font-family:sans-serif;display:flex;justify-content:center;align-items:center;overflow:hidden;background:transparent}
-#wrap{position:relative;width:130px;height:170px;background:rgba(255,255,255,.55);border-radius:18px;display:flex;align-items:center;justify-content:center}
-#pet{width:120px;height:120px;transition:transform .3s}
+#wrap{position:relative;width:240px;height:260px;background:rgba(255,255,255,.55);border-radius:18px;display:flex;align-items:center;justify-content:center;overflow:visible}
+#pet{width:140px;height:140px;transition:transform .3s}
 #bubble{position:absolute;top:-2px;left:50%;transform:translateX(-50%);background:#fff;color:#333;padding:4px 10px;border-radius:14px;font-size:11px;white-space:nowrap;opacity:0;transition:opacity .3s;box-shadow:0 2px 6px rgba(0,0,0,.15);z-index:10}
 #bubble.show{opacity:1}
 @keyframes blink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
@@ -13,7 +13,7 @@ body{width:240px;height:260px;font-family:sans-serif;display:flex;justify-conten
 </style></head><body>
 <div id="wrap">
   <div id="bubble"></div>
-  <svg id="pet" viewBox="0 0 140 140">
+  <svg id="pet" viewBox="0 0 140 140" width="140" height="140" preserveAspectRatio="xMidYMid meet">
     <ellipse cx="70" cy="74" rx="56" ry="50" fill="#f0f0f0" stroke="#aaa" stroke-width="1.8"/>
     <ellipse cx="26" cy="34" rx="17" ry="20" fill="#f0f0f0" stroke="#aaa" stroke-width="1.8" transform="rotate(-15,26,34)"/>
     <ellipse cx="114" cy="34" rx="17" ry="20" fill="#f0f0f0" stroke="#aaa" stroke-width="1.8" transform="rotate(15,114,34)"/>
