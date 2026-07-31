@@ -39,6 +39,8 @@ class OverlayService : Service() {
         wv = WebView(this).apply {
             settings.javaScriptEnabled = true
             setBackgroundColor(0x00000000)
+            isHorizontalScrollBarEnabled = false
+            isVerticalScrollBarEnabled = false
             webViewClient = object : WebViewClient() {}
             setOnTouchListener { _, e -> handleTouch(e) }
             loadUrl("file:///android_asset/pet.html")
