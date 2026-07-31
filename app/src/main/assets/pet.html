@@ -3,7 +3,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:240px;height:260px;font-family:sans-serif;display:flex;justify-content:center;align-items:center;overflow:hidden;background:#ff69b4}
 #wrap{position:relative;width:240px;height:260px;background:transparent;border-radius:18px;display:flex;align-items:center;justify-content:center;overflow:visible}
-#pet{width:140px;height:140px;transition:transform .3s}
+#pet{width:140px;height:140px}
 #bubble{position:absolute;top:-2px;left:50%;transform:translateX(-50%);background:#fff;color:#333;padding:4px 10px;border-radius:14px;font-size:11px;white-space:nowrap;opacity:0;transition:opacity .3s;box-shadow:0 2px 6px rgba(0,0,0,.15);z-index:10}
 #bubble.show{opacity:1}
 @keyframes blink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
@@ -21,6 +21,14 @@ var b=document.getElementById('bubble');
 var bl=document.getElementById('blush-l');
 var br=document.getElementById('blush-r');
 var m=document.getElementById('mouth');
+console.log('=== DEBUG ===');
+window.onload=function(){
+ var w=document.getElementById('wrap');
+ console.log('wrap:',w.offsetWidth,'x',w.offsetHeight,' pos:',w.offsetLeft,',',w.offsetTop);
+ console.log('pet:',p.offsetWidth,'x',p.offsetHeight,' left:',p.offsetLeft,' top:',p.offsetTop);
+ console.log('pet style:',p.style.position,p.style.left,p.style.top,p.style.transform);
+ console.log('body:',document.body.offsetWidth,'x',document.body.offsetHeight);
+};
 function sb(t){b.textContent=t;b.classList.add('show');setTimeout(function(){b.classList.remove('show')},2000)}
 function blush(v){bl.setAttribute('opacity',v?'.6':'.3');br.setAttribute('opacity',v?'.6':'.3')}
 function trigger(t){
