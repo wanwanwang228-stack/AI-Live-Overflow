@@ -3,7 +3,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:240px;height:260px;font-family:sans-serif;display:flex;justify-content:center;align-items:center;overflow:hidden;background:#ff69b4}
 #wrap{position:relative;width:240px;height:260px;background:transparent;border-radius:18px;display:flex;align-items:center;justify-content:center;overflow:visible}
-#pet{width:140px;height:140px;display:block;transition:transform .3s}
+#pet{width:140px;height:140px;transition:transform .3s}
 #bubble{position:absolute;top:-2px;left:50%;transform:translateX(-50%);background:#fff;color:#333;padding:4px 10px;border-radius:14px;font-size:11px;white-space:nowrap;opacity:0;transition:opacity .3s;box-shadow:0 2px 6px rgba(0,0,0,.15);z-index:10}
 #bubble.show{opacity:1}
 @keyframes blink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
@@ -13,7 +13,7 @@ body{width:240px;height:260px;font-family:sans-serif;display:flex;justify-conten
 </style></head><body>
 <div id="wrap">
   <div id="bubble"></div>
-  <div id="pet" style="width:140px;height:140px;background:red;"></div>
+  <div id="pet" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140px;height:140px;background:red;"></div>
 </div>
 <script>
 var p=document.getElementById('pet');
