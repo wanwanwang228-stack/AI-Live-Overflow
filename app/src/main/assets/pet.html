@@ -23,11 +23,9 @@ var b=document.getElementById('bubble');
 var bl=document.getElementById('blush-l');
 var br=document.getElementById('blush-r');
 var m=document.getElementById('mouth');
-var dbg=document.getElementById('debug');
-window.onload=function(){
- var w=document.getElementById('wrap');
- dbg.innerHTML='W=...<br>LP=...<br>XY=...<br>S=...<br>P='+p.offsetLeft+','+p.offsetTop;
-};
+var adb={w:'?',h:'?',lpw:'?',lph:'?',x:'?',y:'?',s:'?'};
+function rd(){document.getElementById('debug').innerHTML='W='+adb.w+'x'+adb.h+'<br>LP='+adb.lpw+'x'+adb.lph+'<br>XY='+adb.x+','+adb.y+'<br>S='+adb.s+'<br>P='+p.offsetLeft+','+p.offsetTop;}
+window.onload=rd;
 function sb(t){b.textContent=t;b.classList.add('show');setTimeout(function(){b.classList.remove('show')},2000)}
 function blush(v){bl.setAttribute('opacity',v?'.6':'.3');br.setAttribute('opacity',v?'.6':'.3')}
 function trigger(t){
