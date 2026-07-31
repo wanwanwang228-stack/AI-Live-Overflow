@@ -26,12 +26,7 @@ var m=document.getElementById('mouth');
 var dbg=document.getElementById('debug');
 window.onload=function(){
  var w=document.getElementById('wrap');
- dbg.innerHTML='wiw:'+window.innerWidth+' wih:'+window.innerHeight
-  +'<br>bw:'+document.body.clientWidth+' bh:'+document.body.clientHeight
-  +' bl:'+document.body.offsetLeft+' bt:'+document.body.offsetTop
-  +'<br>ww:'+w.offsetWidth+' wh:'+w.offsetHeight
-  +' wl:'+w.offsetLeft+' wt:'+w.offsetTop
-  +'<br>pl:'+p.offsetLeft+' pt:'+p.offsetTop+' pw:'+p.offsetWidth;
+ dbg.innerHTML='W:...<br>LP:...<br>XY:...<br>SCALE:...<br>PET:'+p.offsetLeft+','+p.offsetTop;
 };
 function sb(t){b.textContent=t;b.classList.add('show');setTimeout(function(){b.classList.remove('show')},2000)}
 function blush(v){bl.setAttribute('opacity',v?'.6':'.3');br.setAttribute('opacity',v?'.6':'.3')}

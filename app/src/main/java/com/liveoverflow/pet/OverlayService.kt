@@ -49,7 +49,7 @@ class OverlayService : Service() {
             loadUrl("file:///android_asset/pet.html")
             post {
                 val lp = layoutParams as WindowManager.LayoutParams
-                evaluateJavascript("javascript:document.getElementById('debug').innerHTML+='<br>Wx:'+${x}+' Wy:'+${y}+' Ww:'+${width}+' Wh:'+${height}+' sX:'+${scaleX}+' sY:'+${scaleY}+'<br>lpW:'+${lp.width}+' lpH:'+${lp.height}", null)
+                evaluateJavascript("javascript:(function(){var d=document.getElementById('debug');d.innerHTML=d.innerHTML.replace('W:...','W:'+"+width+"+'×'+"+height+"+').replace('LP:...','LP:'+"+lp.width+"+'×'+"+lp.height+"+').replace('XY:...','XY:'+"+x+"+','+"+y+"+').replace('SCALE:...','SCALE:'+"+scaleX+"+','+"+scaleY+"+')})()", null)
             }
         }
         val lp = WindowManager.LayoutParams(PET_W, PET_H,
