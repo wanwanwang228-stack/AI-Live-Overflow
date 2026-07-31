@@ -47,7 +47,10 @@ class OverlayService : Service() {
             webViewClient = object : WebViewClient() {}
             setOnTouchListener { _, e -> handleTouch(e) }
             loadUrl("file:///android_asset/pet.html")
-            post { Log.d("Overlay","scale:${scale} w:${width}h:${height}") }
+            post {
+                val lp = layoutParams as WindowManager.LayoutParams
+                evaluateJavascript("javascript:document.getElementById('debug').innerHTML+='<br>Wx:'+${x}+' Wy:'+${y}+' Ww:'+${width}+' Wh:'+${height}+' sX:'+${scaleX}+' sY:'+${scaleY}+'<br>lpW:'+${lp.width}+' lpH:'+${lp.height}", null)
+            }
         }
         val lp = WindowManager.LayoutParams(PET_W, PET_H,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
