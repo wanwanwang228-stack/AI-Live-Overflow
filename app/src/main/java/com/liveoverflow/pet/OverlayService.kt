@@ -7,6 +7,7 @@ import android.os.Build
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.WindowManager
+import android.view.View
 import android.util.Log
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -42,10 +43,11 @@ class OverlayService : Service() {
             setBackgroundColor(0xFF00FF00.toInt())
             isHorizontalScrollBarEnabled = false
             isVerticalScrollBarEnabled = false
+            setLayerType(View.LAYER_TYPE_SOFTWARE, null)
             webViewClient = object : WebViewClient() {}
             setOnTouchListener { _, e -> handleTouch(e) }
             loadUrl("file:///android_asset/pet.html")
-            post { Log.d("Overlay","WebView measured: ${width}x${height}") }
+            post { Log.d("Overlay","scale:${scale} w:${width}h:${height}") }
         }
         val lp = WindowManager.LayoutParams(PET_W, PET_H,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
